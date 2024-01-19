@@ -33,6 +33,7 @@ xlabel('Frequency')
 ylabel('Power')
 
 %% Part3 
+clear;clc
 data = randi([0 1],1,10);
 data_re=reshape(data,2,[]);
 data_map= bi2de(data_re','left-msb')';
