@@ -120,7 +120,7 @@ grid on;
 axis([0 length(bitstream) -5 6]);
 set(gca,'YTick', [-pulse pulse])
 set(gca,'XTick', 1:length(bitstream))
-title('Unipolar Non-Return-to-Zero Level')
+title('Bipolar - AMI')
 
 %% Part 4: spectrum of AMI
 clear ; clc
@@ -167,6 +167,9 @@ f = (0:n-1)*(fs/n); % frequency range
 m_sep=mean((abs(sep).^2),1)/fs;
 figure(1);
 plot(f,m_sep);
+grid on;
+xlabel('Frequency')
+title('Bipolar - AMI')
 
 %% Manchester
 clear;clc
@@ -212,7 +215,7 @@ grid on;
 axis([0 length(bitstream) -1 1.5]);
 set(gca,'YTick', [-pulse pulse])
 set(gca,'XTick', 1:length(bitstream))
-title('Unipolar Non-Return-to-Zero Level')
+title('Manchester')
 
 %% Spectrum of Manchester
 clear ; clc
@@ -264,3 +267,6 @@ f = (0:n-1)*(fs/n); % frequency range
 m_sep=mean((abs(sep).^2),1)/fs;
 figure(1);
 plot(f,m_sep);
+grid on;
+xlabel('Frequency')
+title('Manchester')
