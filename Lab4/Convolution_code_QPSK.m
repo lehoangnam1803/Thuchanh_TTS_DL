@@ -1,5 +1,6 @@
 clear; clc
 rng default
+% 4-QAM == QPSK
 M = 4; % Modulation order
 k = log2(M); % Bits per symbol
 EbNoVec = (1:2:10); % Eb/No values (dB)
