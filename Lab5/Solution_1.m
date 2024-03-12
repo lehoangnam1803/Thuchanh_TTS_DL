@@ -17,40 +17,51 @@ pac=[];
 msgrx=[];
 tx = [];
 px=1; 
+timer = 3;
+resent = 0;
 while(sn<=m)
     pass=pass+1;
-    %Transmitter
+    %=============Transmitter
     if (RequestToSend&&canSend)
         pac(sn,:)=MakeFrame(msg(sn,:),div);
         tx(sn,:)= pac(sn,:);
-        fprintf('Tx- Truyen frame thu %d \n',sn);
-        cn = sn;
-        sn =sn+1;
+        if (resent)
+            fprintf('Tx - Truyen lai frame thu %d \n',sn-1);
+            resent = 0;
+        else
+            fprintf('Tx - Truyen frame thu %d \n',sn);
+            cn = sn;
+            sn =sn+1;
+        end
         canSend = false;
         arivalrx=true;
     end
-    % Channel
+
+    %================Channel
     msgrx(cn,:)=bsc(tx(cn,:),px);
     
-    %Receiver
+    %================Receiver
     if (arivalrx)
         if (msgrx(cn,1:8)==[0 1 1 1 1 1 1 0])
-            fprintf('Rx-Nhan duoc frame %d \n',rn);
+            fprintf('Rx - Nhan duoc frame %d \n',rn);
             [q2,r2]=deconv(msgrx(cn,:),div);
             r2(1,:)=mod(r2(1,:),2);
             arivalrx=false;
             canSend = true;
             if r2==0
                 rn=rn+1;
-                fprintf('Rx- San sang nhan fame thu %d \n',rn);
+                fprintf('Rx - San sang nhan frame thu %d \n',rn);
             else
                 rn=rn+1;
-                fprintf('Rx- Sai khong truyen lai %d\n',rn);
+                fprintf('Rx - Sai khong truyen lai %d\n',rn);
             end
         else
-            fprintf('Rx-Khong nhan duoc frame %d \n',rn);
-            if px >= 0
-                px = px-0.25;
+            fprintf('Rx - Khong nhan duoc frame %d \n',rn);
+            timer = timer - 1;
+            if timer == 0
+                px = 0;
+                resent = 1;
+                canSend=true;
             end
         end
     end
