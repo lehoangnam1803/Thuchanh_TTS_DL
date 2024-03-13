@@ -17,7 +17,7 @@ pac=[];
 msgrx=[];
 tx = [];
 px=1; 
-timer = 3;
+timer = 0.1;
 resent = 0;
 while(sn<=m)
     pass=pass+1;
@@ -40,6 +40,8 @@ while(sn<=m)
     %================Channel
     msgrx(cn,:)=bsc(tx(cn,:),px);
     
+    %================Set timeout
+    if 
     %================Receiver
     if (arivalrx)
         if (msgrx(cn,1:8)==[0 1 1 1 1 1 1 0])
