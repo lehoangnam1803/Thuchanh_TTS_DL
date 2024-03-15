@@ -13,8 +13,9 @@ while(sn<=m)
     tx(sn,:) = pac(sn,:);
     cn=sn;
     sn=sn+1;
-
     msgrx(cn,:)=bsc(tx(cn,:),px);
 end
+
+
 
 

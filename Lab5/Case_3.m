@@ -17,7 +17,7 @@ pac=[];
 msgrx=[];
 tx = [];
 px = 0;
-prx = 1;
+prx = 0.5;
 timer = 0.002; %timeout
 while(sn<=m)
     pass=pass+1;
@@ -52,7 +52,7 @@ while(sn<=m)
                 arivalrx=false;
                 canSend = true;
                 canSend = bsc(canSend,prx); % ACK loss
-                prx = 0;
+                %prx = 0;
                 if r2==0
                     rn=rn+1;
                     fprintf('Rx - San sang nhan frame thu %d \n',rn);
